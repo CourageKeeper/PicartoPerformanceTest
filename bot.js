@@ -32,7 +32,10 @@ function botLogin (token) {
       .catch(() => {});
 }
 
-bot.on('unhandledRejection', console.error);
+//bot.on('unhandledRejection', console.error);
+bot.on('unhandledRejection', error => {
+  console.log("Unhandled Rejection code: " + error);
+});
 
 bot.on("ready", () => {
   //retryAttempt = 0;//Reset attempts because we got in
@@ -121,6 +124,10 @@ function handleDM(message, chatCommandList){
   var commandList = ["help", "hi", "commands", "addstreamer", "removestreamer",
                      "setbotchannel", "quickadd", "quickremove", "getserverid",
                      "getchannelid", "configure", "configurestreamer", "liststreamers"];
+
+  if (command === "breakme") {
+    bot.emit("unhandledRejection", 621);
+  }
 
   if (command === commandList[0] || command === commandList[1]) {
     replyToMessage(message, "Hello! Reply with: " +
