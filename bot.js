@@ -35,8 +35,8 @@ function botLogin (token) {
 
 //bot.on('unhandledRejection', console.error);
 bot.on('unhandledRejection', error => {
-  console.log("Unhandled Rejection code: " + error + " Now crashing client...");
-  killBot();
+  console.log("Unhandled Rejection code: " + error);//+ " Now crashing client..."
+  //killBot();
   /*
   bot.logOut(() => {
     console.log("Logging out...");
@@ -119,6 +119,10 @@ bot.on("message", message => {
     //if (message.channel.type != "dm") console.log("On channel: " + message.channel.name);
   }
 });//End of bot.on(Message)
+
+setInterval(() => {
+  console.log(Date.now() + " Heatbeat: " + bot.ping);
+}, 60000 * 60);
 
 setInterval(() => {
   request(compareStates)
